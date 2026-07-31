@@ -1,0 +1,15 @@
+# Discussions are not enabled on Vaelii repositories, so a question has no other
+# route: blank issues stay on deliberately.
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security vulnerability
+    url: mailto:support@vaelii.com
+    about: >-
+      Please do not open public issues for vulnerabilities. Use GitHub's
+      "Report a vulnerability" on the affected repository, or email with
+      "SECURITY" in the subject. See SECURITY.md.
+  - name: Read the manual
+    url: https://github.com/vaelii/vaelii/blob/main/docs/index.md
+    about: >-
+      Every subsystem note, starting from the API and the glossary. Worth a
+      search before filing — see SUPPORT.md.
