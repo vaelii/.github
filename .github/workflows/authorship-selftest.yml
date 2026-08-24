@@ -1,0 +1,52 @@
+name: authorship-selftest
+
+# The rules the org's `authorship` gate runs are in this repo now
+# (`actions/authorship/`), so this is where they are tested. Each code repo used
+# to run `python3 scripts/check-authorship.py --selftest` as a `lein lint` row
+# against its own copy; there is one copy to test, and testing it four times
+# tested four different files.
+#
+# The selftest exercises the matching rules against synthetic commits and needs
+# no token, no network and no pull request. The gate itself only has a verdict
+# on a `pull_request` event; this has one on every push.
+#
+# EVERY `uses:` IS A COMMIT SHA with the version in a trailing comment, as in
+# every other workflow in the org. Dependabot reads that comment.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  selftest:
+    name: selftest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: the matching rules, against synthetic commits
+        run: python3 actions/authorship/check-authorship.py --selftest
+
+      # A run with no pull request is green and means nothing for the gate
+      # itself, so the one thing worth asserting about it here is that it says
+      # so rather than passing silently.
+      #
+      # THE TOKEN IS NEEDED EVEN THOUGH NOTHING IS READ. The script asks for it
+      # before it asks whether there is a pull request, so without one it exits
+      # on the missing token and this step proves nothing about the no-PR path.
+      # It read as passing locally, where a shell exports GH_TOKEN per repo.
+      - name: a run with no pull request declines to have a verdict
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          out="$(python3 actions/authorship/check-authorship.py 2>&1)" || {
+            echo "$out"; echo "expected exit 0 with no pull request"; exit 1; }
+          echo "$out"
+          echo "$out" | grep -qi "no pull request" || {
+            echo "expected it to say there is no pull request to check"; exit 1; }

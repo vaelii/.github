@@ -1,0 +1,56 @@
+# The `authorship` gate, once, for every repo in the org.
+#
+# A repo used to carry its own copy of check-authorship.py — 526 lines, four
+# times over, and they had already drifted: the engine's copy said "§7" and
+# named cla-assistant, the siblings' said "Conventions" and noted no CLA. Only
+# prose so far, but a rule change had four places to land and nobody was diffing
+# them. The rules live here now; a repo carries the twenty-line workflow that
+# calls this and nothing else.
+#
+# A COMPOSITE ACTION AND NOT A REUSABLE WORKFLOW, deliberately. A reusable
+# workflow reports its status check as `<caller job> / <called job>`, and the
+# check name is the string branch protection requires: every one of these repos
+# requires the bare `authorship`. A composite action runs inside the caller's
+# job, so the job keeps its name and the required context does not move.
+#
+# WHAT IT READS, AND FROM WHERE. Nothing is checked out. The script reads the
+# pull request's commits, each account's public profile, and the roster
+# `.github/AUTHORS.roster` **at the pull request's base ref** — the copy behind
+# branch protection, never the one in the pull request, so a contributor cannot
+# admit themselves in the change the roster exists to gate. Set ORG_ROSTER_REPO
+# in the caller to union an org-wide roster on top of that; unset, each repo's
+# own roster is the whole of it, which is the mode these repos run: a
+# contributor is admitted where they contribute, on the pull request that brings
+# them, and no repo carries a copy of another repo's contributors.
+#
+# The caller pins this action by SHA, as it pins every other `uses:`. A tag is a
+# mutable ref that whoever holds the account can repoint; the SHA is the
+# artifact. That pin is also the review point for a change to these rules.
+name: authorship
+description: >-
+  Check every author, committer and co-author trailer on a pull request against
+  the repo's AUTHORS.roster, read from the base branch.
+
+# THE TOKEN IS AN INPUT, not a secret read from the environment. A composite
+# action does not see the caller's `secrets` context, and env set on the calling
+# step is not a contract worth resting a gate on — so the token is declared here
+# and defaults to `github.token`, the job's own scoped token. A caller passes
+# nothing; one that needs a different token (a roster in another repo) passes it.
+inputs:
+  token:
+    description: >-
+      Reads the pull request's commits, the accounts' public profiles and the
+      roster. The job's own token is enough for all three on a public repo.
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    # python3 is preinstalled on ubuntu-latest and the script imports only the
+    # standard library, so there is nothing to install and no cache to warm.
+    - name: check authorship against the roster
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+      run: python3 "$GITHUB_ACTION_PATH/check-authorship.py"
