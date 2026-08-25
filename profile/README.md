@@ -27,6 +27,8 @@ defines the vocabulary. Longer-form writing lives at
 |---|---|
 | [vaelii](https://github.com/vaelii/vaelii) | The core engine — in-memory to on-disk out of the box, with a CLI, a headless daemon and a browser UI |
 | [vaelii-foreign](https://github.com/vaelii/vaelii-foreign) | Foreign-format readers — OpenCyc, RDF/OWL, WordNet, OBO and ATOMIC, each translated into one corpus format |
+| [vaelii-postgres](https://github.com/vaelii/vaelii-postgres) | Postgres storage targets — a record store for a KB's durable ground truth, and a snapshot sink for a KB image |
+| [vaelii-sqlite](https://github.com/vaelii/vaelii-sqlite) | SQLite storage targets — a snapshot sink for a KB image in one zero-configuration file, and a live record store |
 
 ## License
 
@@ -35,6 +37,7 @@ repository — always check the `LICENSE` in the one you're using:
 
 - **Engine** ([vaelii](https://github.com/vaelii/vaelii)) — [SSPL-1.0](https://www.mongodb.com/licensing/server-side-public-license); source-available, not open source.
 - **Foreign-format readers** ([vaelii-foreign](https://github.com/vaelii/vaelii-foreign)) — Apache-2.0.
+- **Storage adapters** ([vaelii-postgres](https://github.com/vaelii/vaelii-postgres), [vaelii-sqlite](https://github.com/vaelii/vaelii-sqlite)) — Apache-2.0.
 
 Repositories published later carry their own terms; the knowledge-base data
 (`vaelii-kb`, Q4 2026) will be CC BY. A converted corpus carries its *source's*

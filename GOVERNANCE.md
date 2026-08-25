@@ -33,7 +33,8 @@ contributions.
 ## Licensing & the CLA
 
 Licenses vary **by repository** — the engine (`vaelii`) is SSPL-1.0, the reader
-plugin (`vaelii-foreign`) is Apache-2.0, and repositories published later carry
+plugin (`vaelii-foreign`) and the storage adapters (`vaelii-postgres`,
+`vaelii-sqlite`) are Apache-2.0, and repositories published later carry
 their own terms (knowledge-base data will be CC BY). The
 CLA (required by the SSPL repos; see each repo's `legal/`) assigns Vaelii LLC the
 rights needed to steward the license over time, including relicensing to an

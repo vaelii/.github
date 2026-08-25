@@ -10,7 +10,8 @@ Organization-wide default. A repository may override it with its own
   [`docs/index.md`](https://github.com/vaelii/vaelii/blob/main/docs/index.md)
   maps every subsystem note, `docs/api.md` is the public surface, and
   `docs/glossary.md` defines the vocabulary. `vaelii-foreign` documents its
-  readers in its own `docs/`.
+  readers in its own `docs/`; the storage adapters document themselves in
+  their READMEs.
 - **Questions:** open an issue on the relevant repository and say it's a
   question. Discussions are not enabled. Search the tracker first — it may be
   answered already.
