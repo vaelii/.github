@@ -7,7 +7,7 @@
 # them. The rules live here now; a repo carries the twenty-line workflow that
 # calls this and nothing else.
 #
-# A COMPOSITE ACTION AND NOT A REUSABLE WORKFLOW, deliberately. A reusable
+# A COMPOSITE ACTION AND NOT A REUSABLE WORKFLOW. A reusable
 # workflow reports its status check as `<caller job> / <called job>`, and the
 # check name is the string branch protection requires: every one of these repos
 # requires the bare `authorship`. A composite action runs inside the caller's

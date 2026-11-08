@@ -353,7 +353,7 @@ def selftest():
     # The roster arrives over the API as the file's own bytes — `load_roster` asks
     # for `application/vnd.github.raw` — and a reader that parses every response
     # as JSON turns the first line of the file into a traceback. `--roster` reads
-    # a local path and never crosses that seam, so the case above cannot see it;
+    # a local path and never crosses that boundary, so the case above cannot see it;
     # this one stubs the transport and does.
     class _Resp:
         def __init__(self, body):
@@ -454,8 +454,8 @@ def main():
 
     # Refused, not noted. GitHub's commit list for a pull request stops at 250, so
     # past that the identities are simply unread — and a verdict over a prefix is
-    # indistinguishable from one over the whole, which is the shape of every gate
-    # that goes quietly green. Exit 2 is the same answer a missing roster gets: not
+    # indistinguishable from one over the whole, which is how a gate goes quietly
+    # green. Exit 2 is the same answer a missing roster gets: not
     # "these commits are fine", but "this cannot be checked".
     if len(commits) >= 250:
         die(f"GitHub caps this endpoint at 250 commits and this pull request reads "

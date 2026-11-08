@@ -13,8 +13,7 @@ Storage runs from in-memory to a durable on-disk store, and needs no external
 service.
 
 **Start with [vaelii](https://github.com/vaelii/vaelii)** — the engine boots and
-tests on its own (`lein repl`), no database and no Docker. Its README is the front
-door, and [`docs/`](https://github.com/vaelii/vaelii/tree/main/docs) is the full
+tests on its own (`lein repl`), no database and no Docker. Its README is the starting point, and [`docs/`](https://github.com/vaelii/vaelii/tree/main/docs) is the full
 manual: [`docs/index.md`](https://github.com/vaelii/vaelii/blob/main/docs/index.md)
 maps every subsystem note, and
 [`docs/glossary.md`](https://github.com/vaelii/vaelii/blob/main/docs/glossary.md)
@@ -29,6 +28,7 @@ defines the vocabulary. Longer-form writing lives at
 | [vaelii-foreign](https://github.com/vaelii/vaelii-foreign) | Foreign-format readers — OpenCyc, RDF/OWL, WordNet, OBO and ATOMIC, each translated into one corpus format |
 | [vaelii-postgres](https://github.com/vaelii/vaelii-postgres) | Postgres storage targets — a record store for a KB's durable ground truth, and a snapshot sink for a KB image |
 | [vaelii-sqlite](https://github.com/vaelii/vaelii-sqlite) | SQLite storage targets — a snapshot sink for a KB image in one zero-configuration file, and a live record store |
+| [vaelii-agents](https://github.com/vaelii/vaelii-agents) | Model-provider clients and KB read tools — a provider protocol over the Messages API, Ollama and an offline stub, and read tools generated from the daemon's op table |
 
 ## License
 
@@ -38,6 +38,7 @@ repository — always check the `LICENSE` in the one you're using:
 - **Engine** ([vaelii](https://github.com/vaelii/vaelii)) — [SSPL-1.0](https://www.mongodb.com/licensing/server-side-public-license); source-available, not open source.
 - **Foreign-format readers** ([vaelii-foreign](https://github.com/vaelii/vaelii-foreign)) — Apache-2.0.
 - **Storage adapters** ([vaelii-postgres](https://github.com/vaelii/vaelii-postgres), [vaelii-sqlite](https://github.com/vaelii/vaelii-sqlite)) — Apache-2.0.
+- **Model-provider clients and KB read tools** ([vaelii-agents](https://github.com/vaelii/vaelii-agents)) — Apache-2.0.
 
 Repositories published later carry their own terms; the knowledge-base data
 (`vaelii-kb`, Q4 2026) will be CC BY. A converted corpus carries its *source's*

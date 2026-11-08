@@ -25,9 +25,9 @@ Contributor License Agreement — the `ICLA.md` (individual) and `CCLA.md`
 (corporate) live under that repo's `legal/`. This lets Vaelii LLC steward the
 license (including an eventual move to an OSI-approved license without
 re-contacting every contributor). The **Apache-2.0** repositories —
-`vaelii-foreign`, `vaelii-postgres` and `vaelii-sqlite` — use the DCO alone,
-no CLA. The repo's own `CONTRIBUTING.md` and `LICENSE` say which regime
-applies.
+`vaelii-foreign`, `vaelii-postgres`, `vaelii-sqlite` and `vaelii-agents` — use
+the DCO alone, no CLA. The repo's own `CONTRIBUTING.md` and `LICENSE` say which
+regime applies.
 
 ## Making a change
 
